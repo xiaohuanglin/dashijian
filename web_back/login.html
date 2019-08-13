@@ -96,8 +96,9 @@
           if (username == "" || password == "") {
             // alert("账号 或 密码 为空, 请重新输入!");
             $('.modal-body').text('账号 或 密码 为空, 请重新输入!')
+            // 使用模态框 优化提示界面
             $("#myModal").modal({
-              keyboard: true
+              keyboard: true  // 模态框弹出时  可用esc 键退出 
             });
             return;
           }
@@ -115,8 +116,9 @@
               } else {
                 // alert("账号 或 密码 错误, 请重新登录!");
                 $('.modal-body').text("账号 或 密码 错误, 请重新登录!")
+                // 使用模态框 优化提示界面
                 $("#myModal").modal({
-                  keyboard: true
+                  keyboard: true   // 模态框弹出时  可用esc 键退出 
                 });
               }
             }
