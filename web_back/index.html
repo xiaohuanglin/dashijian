@@ -18,7 +18,7 @@
     <div class="sider">
       <a href="#" class="logo"><img src="images/logo02.png" alt="logo"/></a>
       <div class="user_info">
-        <img src="images/2.jpg" alt="person" />
+        <img src="images/小心心.png" alt="person" />
         <span>欢迎&nbsp;&nbsp;李思思</span>
         <b>管理员</b>
       </div>
@@ -208,6 +208,18 @@
     <script>
       //   入口函数
       $(function() {
+        //  获取用户的信息  昵称 头像   页面一刷新 发送ajax请求 渲染用户信息
+        $.ajax({
+          type: "get",
+          url: "http://localhost:8080/admin/user/info",
+          success: function(data) {
+            //  将相对应的数据 显示在页面上
+            $(".user_info").children("img").attr("src", data.data.userPic);
+            $(".user_info").children("span").html("欢迎&nbsp;&nbsp;" + data.data.nickname);
+            $('.user_center_link').children('img').attr('str',data.data.userPic)
+          }
+        });
+
         //给a 标签 注册点击事件  返回登录页
         $(".btn-tc").on("click", function(e) {
           //  阻止 a 标签 的默认跳转
@@ -223,13 +235,16 @@
           //   }
           //   使用模态框 优化退出 界面
           $("#myModal").modal({
-            keyboard: true
+            keyboard: true // 弹出模态框时  可按 ESC 取消退出
           });
+          //  给模态框 确定 按钮 注册 点击事件
           $(".btn-primary").on("click", function() {
+            //   发送ajax请求
             $.ajax({
               type: "post",
               url: "http://localhost:8080/admin/user/logout",
               success: function(data) {
+                // 退出 返回登录页
                 window.location.href = "./login.html";
               }
             });
