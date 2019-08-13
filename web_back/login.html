@@ -33,6 +33,44 @@
       </div>
     </div>
 
+     <!-- 模态框 -->
+      <div
+        class="modal fade"
+        id="myModal"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="myModalLabel"
+      >
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+              <h4 class="modal-title" id="myModalLabel">温馨提示~~</h4>
+            </div>
+            <div class="modal-body">
+              ...
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-default"
+                data-dismiss="modal"
+              >
+                关闭
+              </button>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+
     <!-- 引入jq文件 -->
     <script src="./js/jquery-1.12.4.min.js"></script>
     <!-- 引入bootstrap的js文件 -->
@@ -51,11 +89,16 @@
             .trim(); // 去掉前后空格
           var password = $(".input_pass")
             .val()
-            .trim();  // 去掉前后空格
+            .trim(); // 去掉前后空格
           // console.log(username , password); //login.html:51 admin 123456
           // 判断是否输入
+
           if (username == "" || password == "") {
-            alert("账号 或 密码 为空, 请重新输入!");
+            // alert("账号 或 密码 为空, 请重新输入!");
+            $('.modal-body').text('账号 或 密码 为空, 请重新输入!')
+            $("#myModal").modal({
+              keyboard: true
+            });
             return;
           }
           // 发送ajax 请求  判断 账号和密码 是否正确
@@ -68,11 +111,13 @@
             },
             success: function(data) {
               if (data.code == 200) {
-                  console.log(2656);
-                  
                 window.location.href = "./index.html";
               } else {
-                alert("账号 或 密码 错误, 请重新登录!");
+                // alert("账号 或 密码 错误, 请重新登录!");
+                $('.modal-body').text("账号 或 密码 错误, 请重新登录!")
+                $("#myModal").modal({
+                  keyboard: true
+                });
               }
             }
           });
